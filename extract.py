@@ -1,4 +1,10 @@
+from bs4 import BeautifulSoup
 import re
+
+with open("mailBox.html", "r") as f:
+    html_content = f.read()
+page = BeautifulSoup(html_content, "lxml")
+
 
 def extract_emails(text):
     # Define the regular expression for email addresses
@@ -9,12 +15,7 @@ def extract_emails(text):
     
     return emails
 
-# Example usage
-text = """
-Here are some email addresses for testing:
-john.doe@example.com, jane.doe@subdomain.example.org,
-info@my-site.com, support@service.io, and test@domain.co.uk
-"""
 
-emails = extract_emails(text)
+# pass the text extracted from the body element to the extract_emails function
+emails = extract_emails(page.find("body").get_text(separator="\n"))
 print("Extracted emails:", emails)
