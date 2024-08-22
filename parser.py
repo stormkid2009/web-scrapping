@@ -1,7 +1,7 @@
 from bs4 import BeautifulSoup
 
 def parse_matches(page_content):
-    soup = BeautifulSoup(page_content, 'html.parser')
+    soup = BeautifulSoup(page_content, 'lxml')
     matches = soup.find_all("li", class_="match-header-holder")
     all_matches = []
 
